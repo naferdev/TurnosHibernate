@@ -33,13 +33,16 @@ public class Localidad {
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
-
+/*
 	@Override
 	public String toString() {
-		return "Localidad [id=" + id + ", nombre=" + nombre + ", provincia=" + provincia + "]";
+		return "Localidad [id=" + id + ", nombre=" + nombre + "]";
 	}
-	
-	
+	*/
+	public String toString() {
+	return "Localidad{id=" + id + ", nombre='" + nombre + '\'' +
+	           ", provincia=" + (provincia != null ? provincia.getNombre() : "null") + '}';
+	}
 
   
     

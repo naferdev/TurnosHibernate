@@ -29,31 +29,20 @@ public class ProvinciaAbm {
 	        c.setNombre(nombre);
 	        return dao.agregar(c);
 	    }
-	}
 	
-	 
-	 /*
-	 public int agregar(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento) {
-	 // consultar si existe un cliente con el mismo dni, y si existe, arrojar la Excepcion
-	 Cliente c = new Cliente(apellido, nombre, dni, fechaDeNacimiento);
-	 return dao.agregar(c);
-	 /*
-	 private Long id;
-	    private String nombre;
-	    private Provincia provincia;
-	 */
-	 
-	//public int agregar()
+	 public void modificar(Provincia c) {
+			dao.actualizar(c);
+		}
+	public void eliminar(Provincia c) {
+		dao.eliminar(c);
+	}
 
-/*
-	public Localidad traer(int id) {
-		return dao.traer(id);
+	public List<Provincia> traer() {
+		return dao.traer();
 		
 	}
-*/
-//	public List<Localidad> traer() {
-		
-		//return ClienteDao.getInstance().traer();
-	//}
+}
+	
+
 
 

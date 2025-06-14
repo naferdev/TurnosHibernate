@@ -5,12 +5,15 @@ import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import datos.Cliente;
 import datos.Localidad;
+import datos.Provincia;
 
 public class LocalidadDao {
 	private static Session session;
@@ -27,6 +30,7 @@ public class LocalidadDao {
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 
+	
 	public long agregar(Localidad objeto) {
 		long id = 0;
 		try {
@@ -64,6 +68,21 @@ public class LocalidadDao {
 			session.close();
 		}
 	}
+	 public Localidad traerLocalidadYProvincia(long idLocalidad) throws HibernateException {
+		 Localidad objeto = null;
+		 try {
+		 iniciaOperacion();
+		 String hql = "from Localidad c inner join fetch c.provincia where c.id = :id";
+		 objeto = (Localidad) session.createQuery(hql).setParameter("id",
+				 idLocalidad).uniqueResult();
+		 } finally {
+		 session.close();
+		 }
+		 return objeto;
+		 }
+	 
+	 
+	 
 
 	public Localidad traer(long id) {
 		Localidad objeto = null;
@@ -75,28 +94,13 @@ public class LocalidadDao {
 		}
 		return objeto;
 	}
-/*
-	public Cliente traer(int dni) {
-		Cliente cliente = null;
-		try {
-			iniciaOperacion();
-			cliente = (Cliente) session.createQuery("from Cliente c where c.dni = :dni")
-					.setParameter("dni", dni)
-					.uniqueResult();
-			// En este caso :dni es un marcador de posición para el parámetro.
-			// Al utilizar el método setParameter para asignar el valor del parámetro dni.
-			// Esto ayuda a prevenir la inyección de SQL.
-		} finally {
-			session.close();
-		}
-		return cliente;
-	}
-*/
+	
+
 	public List<Localidad> traer() {
 		List<Localidad> lista = new ArrayList<Localidad>();
 		try {
 			iniciaOperacion();
-			Query<Localidad> query = session.createQuery("from Localidad c order by c.nombre asc, c.nombre asc",
+			Query<Localidad> query = session.createQuery("from Localidad c inner join fetch c.provincia order by c.nombre asc",
 					Localidad.class);
 			lista = query.getResultList();
 		} finally {
@@ -105,5 +109,18 @@ public class LocalidadDao {
 		return lista;
 	}
 
+	public  List<Localidad> existeLocalidadConNombre(String nombre) {
+		 List<Localidad> localidades= null;
+		try {
+			iniciaOperacion();
+			localidades =  session.createQuery("FROM Localidad p WHERE LOWER(p.nombre) = LOWER(:nombre)",Localidad.class)
+					.setParameter("nombre", nombre)
+					.getResultList();
+			// Crea una lista con los nombres en este caso de las provincias que coincidadn sin importar las mayusculas o minusculas
+		} finally {
+			session.close();
+		}
+		return localidades;
+	}
 
 }
