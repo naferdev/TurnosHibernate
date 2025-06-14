@@ -4,41 +4,54 @@ import java.util.List;
 
 
 import dao.LocalidadDao;
-import datos.Cliente;
+import dao.ProvinciaDao;
 import datos.Localidad;
 import datos.Provincia;
 
 public class LocalidadAbm {
-	private static LocalidadAbm instancia = null; // Patrón Singleton
      LocalidadDao dao= new LocalidadDao();
+     ProvinciaDao provinciaDao= new ProvinciaDao();
+  
 
-	 //public Cliente traer(long idCliente) {
-		 //return dao.traer(idCliente);
-	 //}
-	 
-	 
-	 /*
-	 public int agregar(String apellido, String nombre, int dni, LocalDate fechaDeNacimiento) {
-	 // consultar si existe un cliente con el mismo dni, y si existe, arrojar la Excepcion
-	 Cliente c = new Cliente(apellido, nombre, dni, fechaDeNacimiento);
-	 return dao.agregar(c);
-	 /*
-	 private Long id;
-	    private String nombre;
-	    private Provincia provincia;
-	 */
-	 
-	//public int agregar()
+   	 public Localidad traer(long id) {
+   		 return dao.traer(id);
+   	 }
+   	 
+   	 public long agregar(String nombre, long idProvincia) {
+   		Provincia provincia = provinciaDao.traer(idProvincia); // buscás la provincia por ID
 
+   	    if (provincia == null) {
+   	        System.err.println("Error: No existe provincia con ID " + idProvincia);
+   	        throw new IllegalArgumentException("Provincia no encontrada");
+   	     
+   	    }
+   	   if (dao.existeLocalidadConNombre(nombre)!=null) {
+     	//Verifica si ya existe una provincia con ese nombre o duplicado
+         System.err.println("Error: Ya existe una Localidad con el nombre: " + nombre);
+         //Imprime el errro por consola en rojo
+         throw new IllegalArgumentException("Ya existe una provincia con el nombre: " + nombre);
+         //crea la exepcion;
+      }
+  
 
-	public Localidad traer(int id) {
-		return dao.traer(id);
+   	        Localidad c = new Localidad();
+   	        c.setNombre(nombre);
+   	        c.setProvincia(provincia);
+   	        return dao.agregar(c);
+   	    }
+   	 
+   	public List<Localidad> traer() {
+		return dao.traer();
 		
 	}
-
-//	public List<Localidad> traer() {
-		
-		//return ClienteDao.getInstance().traer();
-	//}
-
+   	public Localidad traerLocalidadyProvincia(long id) {
+   		return dao.traerLocalidadYProvincia(id);
+   	}
+   	
+   	 public void modificar(Localidad c) {
+   			dao.actualizar(c);
+   		}
+   	public void eliminar(Localidad c) {
+   		dao.eliminar(c);
+   	}
 }

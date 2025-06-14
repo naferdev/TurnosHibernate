@@ -114,7 +114,7 @@ public class ProvinciaDao {
 		List<Provincia> lista = new ArrayList<Provincia>();
 		try {
 			iniciaOperacion();
-			Query<Provincia> query = session.createQuery("from Localidad c order by c.nombre asc, c.nombre asc",
+			Query<Provincia> query = session.createQuery("from Provincia c order by c.nombre asc, c.nombre asc",
 					Provincia.class);
 			lista = query.getResultList();
 		} finally {
