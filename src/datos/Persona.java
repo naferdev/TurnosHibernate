@@ -3,46 +3,44 @@ package datos;
 import java.time.LocalDate;
 
 public abstract class Persona {
-	protected int idPersona;
-	protected String apellido;
-	protected String nombre;
-	protected int dni;
-	protected Contacto contacto;
-	
-	public Persona() {}
+    private Long id;
+    private String tipoPersona;
+    private int dni;
+    private String nombre;
+    private Contacto contacto;
+  
+ 
 
-	public Persona(String apellido, String nombre, int dni, Contacto contacto) {
+	public Persona() {
+    }
+    
+	public Persona(Long id, String tipoPersona, int dni, String nombre, Contacto contacto) {
 		super();
-		this.apellido = apellido;
-		this.nombre = nombre;
+		this.id = id;
+		this.tipoPersona = tipoPersona;
 		this.dni = dni;
-		this.contacto = contacto;
+		this.nombre = nombre;
+		this.contacto=contacto;
+		
 	}
 
 	
 
-	public int getIdPersona() {
-		return idPersona;
+    // Getters y Setters
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdPersona(int idPersona) {
-		this.idPersona = idPersona;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getTipoPersona() {
+		return tipoPersona;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setTipoPersona(String tipoPersona) {
+		this.tipoPersona = tipoPersona;
 	}
 
 	public int getDni() {
@@ -53,18 +51,23 @@ public abstract class Persona {
 		this.dni = dni;
 	}
 
-	public Contacto getContacto() {
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	   
+    public Contacto getContacto() {
 		return contacto;
 	}
 
-	public void setContacto(Contacto contacto) {
-		this.contacto = contacto;
+	public void setContacto(Contacto coctacto) {
+		this.contacto = coctacto;
 	}
 
-	@Override
-	public String toString() {
-		return "Persona [apellido=" + apellido + ", nombre=" + nombre + ", dni=" + dni + ", contacto=" + contacto + "]";
-	}
 	
-	
+
 }

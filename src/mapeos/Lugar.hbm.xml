@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  
+    <class name="datos.Lugar" table="lugar">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+
+        <property name="horarioApertura" column="horario_apertura" type="time" not-null="true"/>
+        <property name="horarioCierre" column="horario_cierre" type="time" not-null="true"/>
+
+        <many-to-one name="direccion" class="datos.Direccion" column="direccion_id" unique="true"/>
+        
+         <!-- Relación inversa con servicios -->
+         <set table="servicios_lugares" name="servicios" outer-join="true">
+ 						<key column="lugar_id"/>
+ 				<many-to-many column="servicio_id" class="datos.Servicio"/>
+ 		</set>
+     
+    </class>
+</hibernate-mapping>

@@ -1,79 +1,65 @@
 package datos;
 
 public class Contacto {
-	private int idContacto;
-	private String email;
-	private int movil;
-	private String calle;
-	private String numero;
-	private String localidad;
-	
-	public Contacto() {}
-	
-
-
-	public Contacto(String email, int movil, String calle, String numero, String localidad) {
+    private Long id;
+    private String email;
+    private Integer movil;
+    private Integer telefono;
+    private Direccion direccion;
+    private Persona persona;
+    
+    public Contacto() {
+    }
+	public Contacto(Long id, String email, Integer movil, Integer telefono, Direccion direccion) {
 		super();
+		this.id = id;
 		this.email = email;
 		this.movil = movil;
-		this.calle = calle;
-		this.numero = numero;
-		this.localidad = localidad;
+		this.telefono = telefono;
+		this.direccion = direccion;
 	}
+	
 
-	public int getIdContacto() {
-		return idContacto;
+    // Getters y Setters
+	public Long getId() {
+		return id;
 	}
-
-	public void setIdContacto(int idContacto) {
-		this.idContacto = idContacto;
+	public void setId(Long id) {
+		this.id = id;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public int getMovil() {
+	public Integer getMovil() {
 		return movil;
 	}
-
-	public void setMovil(int movil) {
+	public void setMovil(Integer movil) {
 		this.movil = movil;
 	}
-
-	public String getCalle() {
-		return calle;
+	public Integer getTelefono() {
+		return telefono;
 	}
-
-	public void setCalle(String calle) {
-		this.calle = calle;
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
 	}
-
-	public String getNumero() {
-		return numero;
+	public Direccion getDireccion() {
+		return direccion;
 	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
 	}
-
-	public String getLocalidad() {
-		return localidad;
-	}
-
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
+	public Persona getPersona() { return persona; }
+    public void setPersona(Persona persona) { this.persona = persona; }
+    
 	
 	@Override
 	public String toString() {
-		return "Contacto [email=" + email + ", movil=" + movil + ", calle=" + calle + ", numero=" + numero
-				+ ", localidad=" + localidad + "]";
+		return "Contacto [id=" + id + ", email=" + email + ", movil=" + movil + ", telefono=" + telefono
+				+ ", direccion=" + direccion + "]";
 	}
-	
+
 	
 }
