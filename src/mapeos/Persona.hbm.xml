@@ -1,3 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
+
+<hibernate-mapping>
+
+    <class name="datos.Persona" table="persona" abstract="true">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+
+        <discriminator column="tipo_persona" type="string"/>
+
+        <property name="dni" column="dni" not-null="true"/>
+        <property name="nombre" column="nombre" not-null="true"/>
+      
+        <!-- Aquí irían relaciones a contacto, lugar, especialidad, etc. -->
+		 <one-to-one name="contacto" class="datos.Contacto" ></one-to-one>
+        <!-- Subclases -->
+        <subclass name="datos.Cliente" discriminator-value="CLIENTE"/>
+        <subclass name="datos.Profesional" discriminator-value="PROFESIONAL"/>
+    </class>
+
+</hibernate-mapping>

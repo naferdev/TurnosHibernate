@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 
+    <class name="datos.Servicio" table="servicio">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="descripcion" column="descripcion" />
+        <property name="nombre" column="nombre" />
+        <property name="precio" column="precio" />
+
+        <!-- Relación muchos a muchos con Lugar -->
+        <set table="servicios_lugares" name="lugares" outer-join="true">
+ 						<key column="servicio_id"/>
+ 				<many-to-many column="lugar_id" class="datos.Lugar"/>
+ 		</set>
+ 		
+         <set table="servicios_profesionales" name="profesionales" outer-join="true">
+ 						<key column="servicio_id"/>
+ 				<many-to-many column="profesional_id" class="datos.Persona"/>
+ 		</set>
+        
+   
+
+    </class>
+</hibernate-mapping>
