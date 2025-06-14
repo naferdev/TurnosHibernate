@@ -11,6 +11,6 @@
         <property name="inicio" column="inicio" type="timestamp"/>
         <property name="ocupado" column="ocupado" type="boolean"/>
 
-        <many-to-one name="profesional" class="datos.Persona" column="profesional_id"/>
+        <many-to-one name="profesional" class="datos.Profesional" column="profesional_id"/>
     </class>
 </hibernate-mapping>
