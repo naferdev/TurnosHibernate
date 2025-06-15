@@ -82,7 +82,8 @@ public class Profesional extends Persona {
 
 	@Override
 	public String toString() {
-		return "Profesional [matricula=" + matricula + ", especialidad=" + especialidad + ", disponibilidades="
+		
+		return super.toString()+"PROFESIONAL  matricula=" + matricula + ", especialidad=" + especialidad + ", disponibilidades="
 				+ disponibilidades + ", servicios=" + servicios + ", lugar=" + lugar + "]";
 	}
 

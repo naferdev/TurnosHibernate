@@ -3,7 +3,6 @@
 
 
 <hibernate-mapping>
-
     <class name="datos.Persona" table="persona" abstract="true">
         <id name="id" column="id">
             <generator class="identity"/>
@@ -13,12 +12,32 @@
 
         <property name="dni" column="dni" not-null="true"/>
         <property name="nombre" column="nombre" not-null="true"/>
-      
-        <!-- Aquí irían relaciones a contacto, lugar, especialidad, etc. -->
-		 <one-to-one name="contacto" class="datos.Contacto" ></one-to-one>
-        <!-- Subclases -->
-        <subclass name="datos.Cliente" discriminator-value="CLIENTE"/>
-        <subclass name="datos.Profesional" discriminator-value="PROFESIONAL"/>
-    </class>
 
+        <one-to-one name="contacto" class="datos.Contacto" />
+
+        <!-- Cliente -->
+        <subclass name="datos.Cliente" discriminator-value="CLIENTE">
+            <property name="nroCliente" column="nro_cliente" />
+            <set name="lstTurnos" table="turno" cascade="all-delete-orphan" inverse="true">
+                <key column="cliente_id" />
+                <one-to-many class="datos.Turno" />
+            </set>
+        </subclass>
+
+        <!-- Profesional -->
+        <subclass name="datos.Profesional" discriminator-value="PROFESIONAL">
+            <property name="matricula" column="matricula" />
+            <many-to-one name="especialidad" class="datos.Especialidad" column="especialidad_id" />
+            <many-to-one name="lugar" class="datos.Lugar" column="lugar_id" />
+            <set name="disponibilidades" table="disponibilidad" cascade="all-delete-orphan" inverse="true">
+                <key column="profesional_id" />
+                <one-to-many class="datos.Disponibilidad" />
+            </set>
+            <set name="servicios" table="servicios_profesionales" cascade="all">
+                <key column="profesional_id"/>
+                <many-to-many class="datos.Servicio" column="servicio_id"/>
+            </set>
+        </subclass>
+
+    </class>
 </hibernate-mapping>
