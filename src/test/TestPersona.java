@@ -26,31 +26,36 @@ public class TestPersona {
 		     DireccionAbm direccionabm = new DireccionAbm();
 		     ContactoAbm contactoabm = new ContactoAbm();
 		     PersonaAbm personabm = new PersonaAbm();
-		     //System.out.println(localidadabm.traer(1).toString());
-			
+		 
+		     System.out.println("Agregamos Personas a la base de datos, utilizamos el discriminador para marcar la herencia , Puede ser 'CLIENTE' o 'PROFESIONAL'");
+		     System.out.println("Cabe mencionar que para poder verificar esto seteamos que el campo de contacto pueda ser null");
 			 try {
-                             //String tipoPe, int dni, String nombre, long idContacto,String nroCliente, Set<Turno> lstTurnos,Integer matricula,Especialidad especialidad, Set<Disponibilidad> disponibilidades, Set<Servicio> servicios, Lugar lugar
-				 personabm.agregar("cliente", 35923299, "marcos", null, "2656232", null, null, null, null, null, null);
+       //String tipoPe, int dni, String nombre, long idContacto,String nroCliente, Set<Turno> lstTurnos,Integer matricula,Especialidad especialidad, Set<Disponibilidad> disponibilidades, Set<Servicio> servicios, Lugar lugar
+				//
+				 personabm.agregar("cliente", 1756566, "Roberto", null, "152356", null, null, null, null, null, null);
+				
 				 System.out.println("Persona agregada con éxito.");
+				 
 		        } catch (IllegalArgumentException e) {
 		            System.err.println("No se pudo agregar Persona: " + e.getMessage());
 		        }
 			 
-			 
-			 
-			System.out.println(personabm.traer(17));
+			 System.out.println("Mostramos la lista de Personas, dicriminando si son clientes o profesionales");
 			 //Usamos un for para traer todas las Personas por consola
 			 for(Persona c: personabm.traer()) System.out.println(c);
 			
+			 System.out.println("Agregamos a un Profesional"); 
 			 try {
                  //String tipoPe, int dni, String nombre, long idContacto,String nroCliente, Set<Turno> lstTurnos,Integer matricula,Especialidad especialidad, Set<Disponibilidad> disponibilidades, Set<Servicio> servicios, Lugar lugar
-				 	personabm.agregar("profesional", 35295656, "marcos", null, null, null, 12356, null, null, null, null);
+				 	personabm.agregar("profesional", 352956239, "RAUL", null, null, null, 156303, null, null, null, null);
 				 		System.out.println("Persona agregada con éxito.");
 			 	} catch (IllegalArgumentException e) {
 			 		System.err.println("No se pudo agregar Persona: " + e.getMessage());
 			 	}
-			 
+			 System.out.println("Mostramos la lista de Personas, dicriminando si son clientes o profesionales");
 			 for(Persona c: personabm.traer()) System.out.println(c);
+			 
+			 
 			 /*
 	        Direccion direccionModificar = direccionabm.traerDireccionLocalidadYProvincia(2385);
 			

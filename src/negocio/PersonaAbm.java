@@ -35,6 +35,7 @@ public class PersonaAbm {
    	 public long agregar(String tipoPersona, int dni, String nombre, Long idContacto,String nroCliente,
  			Set<Turno> lstTurnos,Integer matricula,Especialidad especialidad, Set<Disponibilidad> disponibilidades, Set<Servicio> servicios, Lugar lugar) {
    		
+   		 //Validamos que pueda crearse una persona con un contacto null , a fin de poder testear la clase persona
    		Contacto contacto = null;
    	    if (idContacto != null) {
    	        contacto = contactoDao.traer(idContacto);
@@ -44,13 +45,18 @@ public class PersonaAbm {
    	        }
    	    }
 
+   	    //Validamos que la persona no exista
    	    if (!personaDao.existePersona(dni).isEmpty()) {
    	        throw new IllegalArgumentException("Ya existe una Persona con ese DNI: " + dni);
    	    }
    	 
+   	    //cargamos una persona y segun el discriminador , cliente o profesional se instancia y se cargan los atributos correspondientes
    	 	Persona persona;
    	 	switch (tipoPersona.toLowerCase()) {
          case "cliente":
+        	  if (nroCliente == null) {
+                  throw new IllegalArgumentException("El número de cliente no puede ser nulo o vacío.");
+              }
              Cliente cli = new Cliente();
              cli.setContacto(contacto);
              cli.setDni(dni);
@@ -61,6 +67,9 @@ public class PersonaAbm {
              persona =cli;
              break;
          case "profesional":
+        	 if (matricula == null) {
+                 throw new IllegalArgumentException("La matrícula del profesional no puede ser nula.");
+             }
              Profesional pro = new Profesional();
              pro.setContacto(contacto);
              pro.setDisponibilidades(disponibilidades);
