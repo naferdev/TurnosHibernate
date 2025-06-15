@@ -52,32 +52,33 @@ public class TestPersona {
 			 	} catch (IllegalArgumentException e) {
 			 		System.err.println("No se pudo agregar Persona: " + e.getMessage());
 			 	}
+			 
 			 System.out.println("Mostramos la lista de Personas, dicriminando si son clientes o profesionales");
 			 for(Persona c: personabm.traer()) System.out.println(c);
 			 
 			 
-			 /*
-	        Direccion direccionModificar = direccionabm.traerDireccionLocalidadYProvincia(2385);
 			
+	        Persona personaModificar = personabm.traerXdni(352956239);
 			
-			 System.out.printf("Direccion a Modificar: %s\n\n", direccionModificar);
+	        System.out.printf("\n\nBUSCAMOS UNA PERSONA POR SU DNI Y LUEGO MODIFICAMOS SU NOMBRE\n");
+			 System.out.printf("Persona a Modificar: %s\n\n", personaModificar);
 
 				// modificar por set los atributos
-			 direccionModificar.setCalle("Andrade");
-			
-				
+			 personaModificar.setNombre("Roberto");	
 			 // update del objeto
-			 direccionabm.modificar(direccionModificar);
-			
+			 personabm.modificar(personaModificar);
+		
+			 System.out.printf("Persona Modificada: %s\n\n", personabm.traerXdni(352956239));
 			 
-			 System.out.printf("Localidad Modificada: %s\n\n", direccionabm.traerDireccionLocalidadYProvincia(2385));
-			
-			 System.out.printf("Localidad a Eliminar: %s\n\n",direccionabm.traerDireccionLocalidadYProvincia(2387));
-			 Direccion direccionEliminar = direccionabm.traerDireccionLocalidadYProvincia(2387);
-			 direccionabm.eliminar(direccionEliminar);
+			 
+			 System.out.printf("\n\nBUSCAMOS UNA PERSONA POR SU DNI Y LUEGO LA ELIMINAMOS\n");
+			 System.out.printf("Persona  a Eliminar: %s\n\n",personabm.traerXdni(352956239));
+			 Persona personaEliminar = personabm.traerXdni(352956239);
+			 personabm.eliminar(personaEliminar);
+			 System.out.printf("\nMOSTRAMOS LA LISTA DE TODAS LAS PERSONAS CLIENTES Y PROFESIONALES\n");
 			 //Usamos un for para traer todas las Localidad por consola
-			 for(Direccion c: direccionabm.traer()) System.out.println(c);
-			 */
+			 for(Persona c: personabm.traer()) System.out.println(c);
+			 
 			 
 			 
 		    }
