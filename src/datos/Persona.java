@@ -68,6 +68,12 @@ public abstract class Persona {
 		this.contacto = coctacto;
 	}
 
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", tipoPersona=" + tipoPersona + ", dni=" + dni + ", nombre=" + nombre
+				+ ", contacto=" + contacto + "]";
+	}
+
 	
 
 }
