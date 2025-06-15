@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.hibernate.query.Query;
 import datos.Cliente;
 import datos.Direccion;
 import datos.Localidad;
+import datos.Lugar;
 import datos.Provincia;
 
 public class LugarDao {
@@ -32,7 +34,7 @@ public class LugarDao {
 	}
 
 	
-	public long agregar(Direccion objeto) {
+	public long agregar(Lugar objeto) {
 		long id = 0;
 		try {
 			iniciaOperacion();
@@ -46,7 +48,7 @@ public class LugarDao {
 		return id;
 	}
 
-	public void actualizar(Direccion objeto) {
+	public void actualizar(Lugar objeto) {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -58,7 +60,7 @@ public class LugarDao {
 		}
 	}
 
-	public void eliminar(Direccion objeto) {
+	public void eliminar(Lugar objeto) {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -69,16 +71,13 @@ public class LugarDao {
 			session.close();
 		}
 	}
-	 public Direccion traerDireccionLocalidadYProvincia(long idLocalidad) throws HibernateException {
-		 Direccion objeto = null;
+	 public Lugar traerLugarYDireccion(long idLugar) throws HibernateException {
+		 Lugar objeto = null;
 		 try {
 		 iniciaOperacion();
-		 String hql = "FROM Direccion d " +
-                 "JOIN FETCH d.localidad l " +
-                 "JOIN FETCH l.provincia " +
-                 "WHERE l.id = :idLocalidad";
-		 objeto = (Direccion) session.createQuery(hql).setParameter("idLocalidad",
-				 idLocalidad).uniqueResult();
+		 String hql = "FROM Lugar l JOIN FETCH l.direccion WHERE l.id = :idLocalidad";
+		 objeto = (Lugar) session.createQuery(hql).setParameter("idLocalidad",
+				 idLugar).uniqueResult();
 		 } finally {
 		 session.close();
 		 }
@@ -88,11 +87,11 @@ public class LugarDao {
 	 
 	 
 
-	public Direccion traer(long id) {
-		Direccion objeto = null;
+	public Lugar traer(long id) {
+		Lugar objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Direccion) session.get(Direccion.class, id);
+			objeto = (Lugar) session.get(Lugar.class, id);
 		} finally {
 			session.close();
 		}
@@ -100,15 +99,12 @@ public class LugarDao {
 	}
 	
 
-	public List<Direccion> traer() {
-		List<Direccion> lista = new ArrayList<Direccion>();
+	public List<Lugar> traer() {
+		List<Lugar> lista = new ArrayList<Lugar>();
 		try {
 			iniciaOperacion();
-			Query<Direccion> query = session.createQuery( "from Direccion c " +
-				    "inner join fetch c.provincia " +
-				    "inner join fetch c.localidad " +
-				    "order by c.calle asc",
-					Direccion.class);
+			Query<Lugar> query = session.createQuery( "from Lugar c inner join fetch c.direccion order by  c.direccion.calle  asc",
+					Lugar.class);
 			lista = query.getResultList();
 		} finally {
 			session.close();
@@ -116,19 +112,21 @@ public class LugarDao {
 		return lista;
 	}
 
-	public  List<Direccion> existeDireccionConNombre(String calle,Integer altura) {
-		 List<Direccion> direcciones= null;
+	
+	public  List<Lugar> existeDireccionConLugar(Time horarioApertura,long idDireccion) {
+		 List<Lugar> lugares= null;
 		try {
 			iniciaOperacion();
-			direcciones =  session.createQuery("FROM Direccion p WHERE LOWER(p.calle) = LOWER(:calle) AND p.altura = :altura",Direccion.class)
-					.setParameter("calle", calle)
-					.setParameter("altura", altura)
+			lugares =  session.createQuery("FROM Lugar p WHERE p.direccion.id  = :idDireccion AND p.horarioApertura = :horarioApertura",Lugar.class)
+					.setParameter("idDireccion", idDireccion)
+					.setParameter("horarioApertura", horarioApertura)
 					.getResultList();
 			// Crea una lista con los nombres en este caso de las provincias que coincidadn sin importar las mayusculas o minusculas
 		} finally {
 			session.close();
 		}
-		return direcciones;
+		return lugares;
 	}
 
+	
 }

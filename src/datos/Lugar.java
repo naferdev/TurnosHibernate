@@ -59,7 +59,7 @@ public class Lugar {
 	@Override
 	public String toString() {
 		return "Lugar [id=" + id + ", horarioApertura=" + horarioApertura + ", horarioCierre=" + horarioCierre
-				+ ", direccion=" + direccion + "]";
+				+ ", direccion=" +  (direccion != null ? direccion.getCalle() : "null") + "]";
 	}
 	
 	
