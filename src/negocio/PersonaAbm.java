@@ -95,6 +95,11 @@ public class PersonaAbm {
 		
 	}
    	
+   	public Persona traerXdni(int dni) {
+   		return personaDao.traerXdni(dni);
+   		
+   	}
+   	
    	
    	/*
    	public Contacto traerDireccionLocalidadYProvincia(long idLocalidad) {

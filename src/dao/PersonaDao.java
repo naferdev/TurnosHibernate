@@ -82,6 +82,37 @@ public class PersonaDao {
 		return objeto;
 	}
 	
+	public Persona traerXdni(int dni) {	
+		Persona persona = null;
+		try {
+			iniciaOperacion();
+			persona = (Persona) session.createQuery("from Persona c where c.dni = :dni")
+					.setParameter("dni", dni)
+					.uniqueResult();
+			 Hibernate.initialize(persona.getContacto());
+
+	            if (persona instanceof Cliente) {
+	                Hibernate.initialize(((Cliente) persona).getLstTurnos());
+	            }
+
+	            if (persona instanceof Profesional) {
+	                Profesional p = (Profesional) persona;
+	                Hibernate.initialize(p.getEspecialidad());
+	                Hibernate.initialize(p.getLugar());
+	                Hibernate.initialize(p.getDisponibilidades());
+	                Hibernate.initialize(p.getServicios());
+	            }
+	        
+		} finally {
+			session.close();
+		}
+		return persona;
+	}
+	
+	
+	
+	
+	
 	public  List<Persona> existePersona(int dni) {
 		 List<Persona> personas= null;
 		try {
