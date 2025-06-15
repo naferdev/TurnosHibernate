@@ -40,6 +40,7 @@ public class Localidad {
 	}
 	*/
 	public String toString() {
+		
 	return "Localidad{id=" + id + ", nombre='" + nombre + '\'' +
 	           ", provincia=" + (provincia != null ? provincia.getNombre() : "null") + '}';
 	}
