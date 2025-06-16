@@ -15,6 +15,6 @@
 
         <many-to-one name="direccion" class="datos.Direccion" column="direccion_id" unique="true"/>
 
-       
+       <one-to-one name="persona" class="datos.Persona" constrained="true"/>
         </class>
 </hibernate-mapping>

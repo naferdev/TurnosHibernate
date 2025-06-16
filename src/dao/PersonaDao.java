@@ -109,7 +109,32 @@ public class PersonaDao {
 		return persona;
 	}
 	
-	
+	public Persona traerXmatricula(Integer matricula) {
+		Persona persona = null;
+		try {
+			iniciaOperacion();
+			persona = (Persona) session.createQuery("from Persona c where c.matricula = :matricula")
+					.setParameter("matricula", matricula)
+					.uniqueResult();
+			 Hibernate.initialize(persona.getContacto());
+
+	            if (persona instanceof Cliente) {
+	                Hibernate.initialize(((Cliente) persona).getLstTurnos());
+	            }
+
+	            if (persona instanceof Profesional) {
+	                Profesional p = (Profesional) persona;
+	                Hibernate.initialize(p.getEspecialidad());
+	                Hibernate.initialize(p.getLugar());
+	                Hibernate.initialize(p.getDisponibilidades());
+	                Hibernate.initialize(p.getServicios());
+	            }
+	        
+		} finally {
+			session.close();
+		}
+		return persona;
+	}
 	
 	
 	
@@ -156,8 +181,11 @@ public class PersonaDao {
 			
 			
 			 for (Persona persona : lista) {
-		            Hibernate.initialize(persona.getContacto());
-
+				   if (persona.getContacto() != null) {
+				        Hibernate.initialize(persona.getContacto());
+				        Hibernate.initialize(persona.getContacto().getDireccion());
+				    }
+		      
 		            if (persona instanceof Cliente) {
 		                Hibernate.initialize(((Cliente) persona).getLstTurnos());
 		            }

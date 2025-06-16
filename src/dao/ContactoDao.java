@@ -35,6 +35,7 @@ public class ContactoDao {
 			iniciaOperacion();
 			 id = (Long) session.save(objeto);;
 			tx.commit();
+			
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
@@ -77,6 +78,20 @@ public class ContactoDao {
 		}
 		return objeto;
 	}
+	public  List<Contacto> existeConctacoMail(String email) {
+		 List<Contacto> contactos= null;
+		try {
+			iniciaOperacion();
+			contactos =  session.createQuery("FROM Contacto p WHERE LOWER(p.email) = LOWER(:email)",Contacto.class)
+					.setParameter("email", email)
+					.getResultList();
+			// Crea una lista con los nombres en este caso de las provincias que coincidadn sin importar las mayusculas o minusculas
+		} finally {
+			session.close();
+		}
+		return contactos;
+	}
+	
 	
 	public  List<Contacto> existeDireccionContacto(String email,long idDireccion) {
 		 List<Contacto> provincias= null;
@@ -116,7 +131,7 @@ public class ContactoDao {
 		List<Contacto> lista = new ArrayList<Contacto>();
 		try {
 			iniciaOperacion();
-			Query<Contacto> query = session.createQuery("from Contacto c order by c.nombre asc, c.nombre asc",
+			Query<Contacto> query = session.createQuery("from Contacto c order by c.email asc, c.mail asc",
 					Contacto.class);
 			lista = query.getResultList();
 		} finally {

@@ -27,9 +27,18 @@ public class PersonaAbm {
      DireccionDao direccionDao= new DireccionDao();
      ContactoDao contactoDao= new ContactoDao();
      PersonaDao personaDao = new PersonaDao();
+     ContactoAbm contactoabm= new ContactoAbm();
 
    	 public Persona traer(long id) {
    		 return personaDao.traer(id);
+   	 }
+   	 public long agregarContactoPersona(Persona persona,String email,Integer movil, Integer telefono, long idDireccion) {
+   		Contacto cont=contactoabm.agregar(email, movil,telefono,idDireccion);
+    	 cont.setPersona(persona);
+ 
+   		persona.setContacto(cont);
+   		System.out.println("ID de persona asociada al contacto: " + persona.getId());
+   		 return contactoDao.agregar(cont);
    	 }
    	 
    	 public long agregar(String tipoPersona, int dni, String nombre, Long idContacto,String nroCliente,
@@ -98,6 +107,9 @@ public class PersonaAbm {
    	public Persona traerXdni(int dni) {
    		return personaDao.traerXdni(dni);
    		
+   	}
+   	public Persona traerXmatricula(Integer matricula) {
+   		return personaDao.traerXmatricula(matricula);
    	}
    	
    	

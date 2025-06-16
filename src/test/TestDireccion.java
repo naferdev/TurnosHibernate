@@ -14,20 +14,25 @@ public class TestDireccion {
 		 
 		     DireccionAbm direccionabm = new DireccionAbm();
 		     
-		     //System.out.println(localidadabm.traer(1).toString());
-			
+		 
+		
 			 try {
+			
 				 direccionabm.agregar(550,"Mar del Plata",2387);
+				 System.out.println("AGREGAMOS UNA DIRECCION \n");
+				 
 		            System.out.println("Direccion agregada con éxito.");
 		        } catch (IllegalArgumentException e) {
 		            System.err.println("No se pudo agregar la Direccion: " + e.getMessage());
 		        }
 			 
 			 
-			 	
+			 System.out.println("TRAEMOS UNA DIRECCION CON SU LOCALIDAD Y PROVINCIA BUSCADA POR ID \n"); 	
 			System.out.println(direccionabm.traerDireccionLocalidadYProvincia(2383));
-			 //Usamos un for para traer todas las Localidad por consola
-			 for(Direccion c: direccionabm.traer()) System.out.println(c);
+			
+			//Usamos un for para traer todas las Localidad por consola
+			 System.out.println("\nMOSTRAMOS UNA LISTA DE TODAS LAS DIRECCIONES CREADAS"); 
+			for(Direccion c: direccionabm.traer()) System.out.println(c);
 			
 	        Direccion direccionModificar = direccionabm.traerDireccionLocalidadYProvincia(2385);
 			
@@ -42,12 +47,13 @@ public class TestDireccion {
 			 direccionabm.modificar(direccionModificar);
 			
 			 
-			 System.out.printf("Localidad Modificada: %s\n\n", direccionabm.traerDireccionLocalidadYProvincia(2385));
+			 System.out.printf("Direccion Modificada se cambia el nombre: %s\n\n", direccionabm.traerDireccionLocalidadYProvincia(2385));
 			
-			 System.out.printf("Localidad a Eliminar: %s\n\n",direccionabm.traerDireccionLocalidadYProvincia(2387));
+			 System.out.printf("Direccion a Eliminar: %s\n\n",direccionabm.traerDireccionLocalidadYProvincia(2387));
 			 Direccion direccionEliminar = direccionabm.traerDireccionLocalidadYProvincia(2387);
 			 direccionabm.eliminar(direccionEliminar);
 			 //Usamos un for para traer todas las Localidad por consola
+			 System.out.println("\nMOSTRAMOS LA LISTA LUEGO DE ELIMINAR"); 
 			 for(Direccion c: direccionabm.traer()) System.out.println(c);
 			 
 			 
