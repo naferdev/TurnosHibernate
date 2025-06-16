@@ -66,8 +66,7 @@ public class Disponibilidad {
 	@Override
 	public String toString() {
 		
-		return "Disponibilidad [id=" + id + ", duracion=" + duracion + ", inicio=" + inicio + ", ocupado=" + ocupado
-				+ ", profesional=" + profesional + "]";
+		return "Disponibilidad [id=" + id + ", duracion=" + duracion + ", inicio=" + inicio + ", ocupado=" + ocupado + "]";
 	}
 	
 	

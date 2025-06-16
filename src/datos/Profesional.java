@@ -3,12 +3,20 @@ package datos;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.Hibernate;
+
 public class Profesional extends Persona {
   
 	private Integer matricula;
 	private Especialidad especialidad;
 	private Set<Disponibilidad> disponibilidades;
 	private Set<Servicio> servicios;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lugar_id")
 	private Lugar lugar;
 	
 	
@@ -82,9 +90,8 @@ public class Profesional extends Persona {
 
 	@Override
 	public String toString() {
-		
-		return super.toString()+"PROFESIONAL  matricula=" + matricula + ", especialidad=" + especialidad + ", disponibilidades="
-				+ disponibilidades + ", servicios=" + servicios + ", lugar=" + lugar + "]";
+		Hibernate.initialize(lugar.getDireccion().getCalle());
+		return super.toString()+"PROFESIONAL  matricula=" + matricula + ", especialidad=" +  ", lugar=" + lugar.getDireccion().getCalle() + "]";
 	}
 
 

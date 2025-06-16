@@ -75,7 +75,7 @@ public class Direccion {
 	@Override
 	public String toString() {
 		
-		return "Direccion [id=" + id + ", altura=" + altura + ", calle=" + calle + ", localidad=" +  (localidad != null ? localidad.getNombre() : "null")+ ", provincia=" + (provincia != null ? provincia.getNombre() : "null") + "]";
+		return "Direccion [id=" + id + ", altura=" + altura + ", calle=" + calle + "]";
 	}
 
  

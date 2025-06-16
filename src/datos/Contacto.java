@@ -57,8 +57,7 @@ public class Contacto {
 	
 	@Override
 	public String toString() {
-		return "Contacto [id=" + id + ", email=" + email + ", movil=" + movil + ", telefono=" + telefono
-				+ ", direccion=" +  (direccion != null ? direccion.getCalle() : "null") +  (direccion != null ? direccion.getAltura() : "null");
+		return "Contacto [id=" + id + ", email=" + email + ", movil=" + movil + ", telefono=" + telefono + "]";
 	}
 
 	

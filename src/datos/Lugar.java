@@ -3,10 +3,16 @@ package datos;
 import java.sql.Time;
 import java.util.Set;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Lugar {
     private Long id;
     private java.sql.Time horarioApertura;
     private java.sql.Time horarioCierre;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
     
     
@@ -58,8 +64,7 @@ public class Lugar {
 
 	@Override
 	public String toString() {
-		return "Lugar [id=" + id + ", horarioApertura=" + horarioApertura + ", horarioCierre=" + horarioCierre
-				+ ", direccion=" +  (direccion != null ? direccion.getCalle() : "null") + "]";
+		return "Lugar [id=" + id + ", horarioApertura=" + horarioApertura + ", horarioCierre=" + horarioCierre + "]";
 	}
 	
 	
