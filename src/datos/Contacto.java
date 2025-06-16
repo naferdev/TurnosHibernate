@@ -10,7 +10,7 @@ public class Contacto {
     
     public Contacto() {
     }
-	public Contacto(Long id, String email, Integer movil, Integer telefono, Direccion direccion) {
+	public Contacto(Long id, String email, Integer movil, Integer telefono, Direccion direccion,Persona persona) {
 		super();
 		this.id = id;
 		this.email = email;

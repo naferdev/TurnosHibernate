@@ -5,10 +5,12 @@ import java.util.List;
 import dao.ContactoDao;
 import dao.DireccionDao;
 import dao.LocalidadDao;
+import dao.PersonaDao;
 import dao.ProvinciaDao;
 import datos.Contacto;
 import datos.Direccion;
 import datos.Localidad;
+import datos.Persona;
 import datos.Provincia;
 
 public class ContactoAbm {
@@ -16,21 +18,25 @@ public class ContactoAbm {
      ProvinciaDao provinciaDao= new ProvinciaDao();
      DireccionDao direccionDao= new DireccionDao();
      ContactoDao contactoDao= new ContactoDao();
+     PersonaDao personaDao= new PersonaDao();
   
 
    	 public Contacto traer(long id) {
    		 return contactoDao.traer(id);
    	 }
    	 
-   	 public long agregar(String email, Integer movil, Integer telefono, long idDireccion) {
-   		Direccion direccion = direccionDao.traer(idDireccion); // buscás la provincia por ID
+   	 
+   	 
+   	 public Contacto agregar(String email, Integer movil, Integer telefono, long idDireccion) {
+   		Direccion direccion = direccionDao.traer(idDireccion); // Busca la direccion x id
+   	
    	
    	    if (direccion == null) {
    	        System.err.println("Error: No existe Direccion con ID " + idDireccion);
-   	        throw new IllegalArgumentException("Provincia no encontrada");
+   	        throw new IllegalArgumentException("Direccion no no encontrada");
    	     
    	    }
-   	    List<Contacto> contactos = contactoDao.existeDireccionContacto(email, idDireccion);
+   	    List<Contacto> contactos = contactoDao.existeConctacoMail(email);
    	 	if (!contactos.isEmpty()) {
      	//Verifica si ya existe una provincia con ese nombre o duplicado
          System.err.println("Error: Ya existe un Contacto con el mail: " + email);
@@ -45,7 +51,10 @@ public class ContactoAbm {
    	        c.setEmail(email);
    	        c.setMovil(movil);
    	        c.setTelefono(telefono);
-   	        return contactoDao.agregar(c);
+   
+   	       
+   	        
+   	        return c;
    	        
    	    }
    	 
@@ -53,14 +62,8 @@ public class ContactoAbm {
 		return contactoDao.traer();
 		
 	}
-   	/*
-   	public Contacto traerDireccionLocalidadYProvincia(long idLocalidad) {
-   		return direccionDao.traerDireccionLocalidadYProvincia(idLocalidad);
-   	}
-   	*/
-   	public Localidad traerLocalidadyProvincia(long id) {
-   		return dao.traerLocalidadYProvincia(id);
-   	}
+  
+ 
    	
    	 public void modificar(Contacto c) {
    		contactoDao.actualizar(c);

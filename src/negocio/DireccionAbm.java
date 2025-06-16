@@ -29,7 +29,7 @@ public class DireccionAbm {
    	    }
    	    List<Direccion> direcciones = direccionDao.existeDireccionConNombre(calle, altura);
    	 	if (!direcciones.isEmpty()) {
-     	//Verifica si ya existe una provincia con ese nombre o duplicado
+     
          System.err.println("Error: Ya existe una Direccion con el nombre: " + calle);
          //Imprime el errro por consola en rojo
          throw new IllegalArgumentException("Ya existe una direccion con el nombre: " + calle);

@@ -13,6 +13,7 @@ import datos.Provincia;
 import datos.Servicio;
 import datos.Turno;
 import datos.Persona;
+import datos.Profesional;
 import negocio.LocalidadAbm;
 import negocio.PersonaAbm;
 import negocio.ProvinciaAbm;
@@ -47,7 +48,15 @@ public class TestPersona {
 			 System.out.println("Agregamos a un Profesional"); 
 			 try {
                  //String tipoPe, int dni, String nombre, long idContacto,String nroCliente, Set<Turno> lstTurnos,Integer matricula,Especialidad especialidad, Set<Disponibilidad> disponibilidades, Set<Servicio> servicios, Lugar lugar
-				 	personabm.agregar("profesional", 352956239, "RAUL", null, null, null, 156303, null, null, null, null);
+				 	personabm.agregar("profesional", 35295623, "RAUL", null, null, null, 156303, null, null, null, null);
+				 		System.out.println("Persona agregada con éxito.");
+			 	} catch (IllegalArgumentException e) {
+			 		System.err.println("No se pudo agregar Persona: " + e.getMessage());
+			 	}
+			 System.out.println("Agregamos a un Profesional"); 
+			 try {
+                 //String tipoPe, int dni, String nombre, long idContacto,String nroCliente, Set<Turno> lstTurnos,Integer matricula,Especialidad especialidad, Set<Disponibilidad> disponibilidades, Set<Servicio> servicios, Lugar lugar
+				 	personabm.agregar("profesional", 17233623, "Marcos Solis", null, null, null, 10900, null, null, null, null);
 				 		System.out.println("Persona agregada con éxito.");
 			 	} catch (IllegalArgumentException e) {
 			 		System.err.println("No se pudo agregar Persona: " + e.getMessage());
@@ -56,9 +65,18 @@ public class TestPersona {
 			 System.out.println("Mostramos la lista de Personas, dicriminando si son clientes o profesionales");
 			 for(Persona c: personabm.traer()) System.out.println(c);
 			 
-			 
+			  System.out.printf("\n\nBUSCAMOS UNA PERSONA POR SU MATRICULA \n");
+			  Persona personaMatricula =personabm.traerXmatricula(10900);
+			  Profesional profMatricula= (Profesional) personaMatricula;
+			  
+			  System.out.printf("\n\nAGREGAMOS A LA PERSONA QUE BUSCABAMOS POR MATRICULA UN CONTACTO\n");
+			  personabm.agregarContactoPersona(personaMatricula, "na_fernandez", 15465623, 1546562, 9);
+			  
+			  System.out.printf("\nMatricula : %d   ",profMatricula.getMatricula());
+			  System.out.printf("Persona : %s\n", personaMatricula);
 			
-	        Persona personaModificar = personabm.traerXdni(352956239);
+			  
+	        Persona personaModificar = personabm.traerXdni(35295623);
 			
 	        System.out.printf("\n\nBUSCAMOS UNA PERSONA POR SU DNI Y LUEGO MODIFICAMOS SU NOMBRE\n");
 			 System.out.printf("Persona a Modificar: %s\n\n", personaModificar);
@@ -68,19 +86,18 @@ public class TestPersona {
 			 // update del objeto
 			 personabm.modificar(personaModificar);
 		
-			 System.out.printf("Persona Modificada: %s\n\n", personabm.traerXdni(352956239));
+			 System.out.printf("Persona Modificada: %s\n\n", personabm.traerXdni(35295623));
 			 
 			 
 			 System.out.printf("\n\nBUSCAMOS UNA PERSONA POR SU DNI Y LUEGO LA ELIMINAMOS\n");
-			 System.out.printf("Persona  a Eliminar: %s\n\n",personabm.traerXdni(352956239));
-			 Persona personaEliminar = personabm.traerXdni(352956239);
+			 System.out.printf("Persona  a Eliminar: %s\n\n",personabm.traerXdni(35295623));
+			 Persona personaEliminar = personabm.traerXdni(35295623);
 			 personabm.eliminar(personaEliminar);
 			 System.out.printf("\nMOSTRAMOS LA LISTA DE TODAS LAS PERSONAS CLIENTES Y PROFESIONALES\n");
 			 //Usamos un for para traer todas las Localidad por consola
 			 for(Persona c: personabm.traer()) System.out.println(c);
 			 
-			 
-			 
+		
 		    }
 			
 	 }
