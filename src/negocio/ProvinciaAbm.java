@@ -15,9 +15,14 @@ public class ProvinciaAbm {
 	 public Provincia traer(long id) {
 		 return dao.traer(id);
 	 }
+	 public Provincia traerXnombre(String nombre) {
+		 return dao.traerXnombre(nombre);
+	 }
 	 
 	 public long agregar(String nombre) {
-	        if (dao.existeProvinciaConNombre(nombre)!=null) {
+		 
+	        if (!dao.existeProvinciaConNombre(nombre).isEmpty()) {
+	        	 
 	        	//Verifica si ya existe una provincia con ese nombre o duplicado
 	            System.err.println("Error: Ya existe una provincia con el nombre: " + nombre);
 	            //Imprime el errro por consola en rojo

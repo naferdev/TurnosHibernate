@@ -65,7 +65,25 @@ public class ProvinciaDao {
 			session.close();
 		}
 	}
-
+	public Provincia traerXnombre(String nombre) {
+		Provincia provincia = null;
+		try {
+			iniciaOperacion();
+			provincia = (Provincia) session.createQuery("from Provincia c where LOWER(c.nombre) = LOWER(:nombre)")
+					.setParameter("nombre", nombre)
+					.uniqueResult();
+			 if (provincia == null) {
+		            throw new IllegalArgumentException("Provincia con nombre '" + nombre + "' no encontrada.");
+		        }
+		} finally {
+			session.close();
+		}
+		return provincia;
+		
+	}
+	
+	
+	
 	public Provincia traer(long id) {
 		Provincia objeto = null;
 		try {
@@ -78,7 +96,7 @@ public class ProvinciaDao {
 	}
 	
 	public  List<Provincia> existeProvinciaConNombre(String nombre) {
-		 List<Provincia> provincias= null;
+		 List<Provincia> provincias= new ArrayList<>();
 		try {
 			iniciaOperacion();
 			provincias =  session.createQuery("FROM Provincia p WHERE LOWER(p.nombre) = LOWER(:nombre)",Provincia.class)
@@ -93,23 +111,6 @@ public class ProvinciaDao {
 	
 	
 	
-/*
-	public Cliente traer(int dni) {
-		Cliente cliente = null;
-		try {
-			iniciaOperacion();
-			cliente = (Cliente) session.createQuery("from Cliente c where c.dni = :dni")
-					.setParameter("dni", dni)
-					.uniqueResult();
-			// En este caso :dni es un marcador de posición para el parámetro.
-			// Al utilizar el método setParameter para asignar el valor del parámetro dni.
-			// Esto ayuda a prevenir la inyección de SQL.
-		} finally {
-			session.close();
-		}
-		return cliente;
-	}
-*/
 	public List<Provincia> traer() {
 		List<Provincia> lista = new ArrayList<Provincia>();
 		try {

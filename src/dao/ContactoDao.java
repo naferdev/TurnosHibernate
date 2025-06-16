@@ -110,23 +110,7 @@ public class ContactoDao {
 	
 	
 	
-/*
-	public Cliente traer(int dni) {
-		Cliente cliente = null;
-		try {
-			iniciaOperacion();
-			cliente = (Cliente) session.createQuery("from Cliente c where c.dni = :dni")
-					.setParameter("dni", dni)
-					.uniqueResult();
-			// En este caso :dni es un marcador de posición para el parámetro.
-			// Al utilizar el método setParameter para asignar el valor del parámetro dni.
-			// Esto ayuda a prevenir la inyección de SQL.
-		} finally {
-			session.close();
-		}
-		return cliente;
-	}
-*/
+
 	public List<Contacto> traer() {
 		List<Contacto> lista = new ArrayList<Contacto>();
 		try {

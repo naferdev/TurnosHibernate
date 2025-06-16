@@ -112,12 +112,7 @@ public class PersonaAbm {
    		return personaDao.traerXmatricula(matricula);
    	}
    	
-   	
-   	/*
-   	public Contacto traerDireccionLocalidadYProvincia(long idLocalidad) {
-   		return direccionDao.traerDireccionLocalidadYProvincia(idLocalidad);
-   	}
-   	*/
+ 
    	public Localidad traerLocalidadyProvincia(long id) {
    		return dao.traerLocalidadYProvincia(id);
    	}

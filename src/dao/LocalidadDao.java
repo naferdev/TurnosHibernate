@@ -110,7 +110,8 @@ public class LocalidadDao {
 	}
 
 	public  List<Localidad> existeLocalidadConNombre(String nombre) {
-		 List<Localidad> localidades= null;
+	
+		 List<Localidad> localidades= new ArrayList<>();;
 		try {
 			iniciaOperacion();
 			localidades =  session.createQuery("FROM Localidad p WHERE LOWER(p.nombre) = LOWER(:nombre)",Localidad.class)

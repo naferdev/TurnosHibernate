@@ -25,7 +25,8 @@ public class LocalidadAbm {
    	        throw new IllegalArgumentException("Provincia no encontrada");
    	     
    	    }
-   	   if (dao.existeLocalidadConNombre(nombre)!=null) {
+   
+   	   if (!dao.existeLocalidadConNombre(nombre).isEmpty()) {
      	//Verifica si ya existe una provincia con ese nombre o duplicado
          System.err.println("Error: Ya existe una Localidad con el nombre: " + nombre);
          //Imprime el errro por consola en rojo

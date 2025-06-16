@@ -70,7 +70,7 @@ public class TestPersona {
 			  Profesional profMatricula= (Profesional) personaMatricula;
 			  
 			  System.out.printf("\n\nAGREGAMOS A LA PERSONA QUE BUSCABAMOS POR MATRICULA UN CONTACTO\n");
-			  personabm.agregarContactoPersona(personaMatricula, "na_fernandez", 15465623, 1546562, 9);
+			  personabm.agregarContactoPersona(personaMatricula, "na_fernandez", 15465623, 1546562, 20);
 			  
 			  System.out.printf("\nMatricula : %d   ",profMatricula.getMatricula());
 			  System.out.printf("Persona : %s\n", personaMatricula);
